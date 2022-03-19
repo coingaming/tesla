@@ -1,8 +1,11 @@
 defmodule Tesla.Mixfile do
   use Mix.Project
 
-  @source_url "https://github.com/teamon/tesla"
-  @version "1.4.4"
+  @source_url "https://github.com/coingaming/tesla"
+  @version (case File.read("VERSION") do
+              {:ok, version} -> String.trim(version)
+              {:error, _} -> "0.0.0-development"
+            end)
 
   def project do
     [
@@ -37,9 +40,11 @@ defmodule Tesla.Mixfile do
 
   defp package do
     [
+      organization: "coingaming",
       maintainers: ["Tymon Tobolski"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/teamon/tesla"}
+      files: ["lib", "mix.exs", "README.md", "CHANGELOG.md", "VERSION"],
+      links: %{"GitHub" => "https://github.com/coingaming/tesla/tree/v#{@version}"}
     ]
   end
 
@@ -57,7 +62,7 @@ defmodule Tesla.Mixfile do
       # http clients
       {:ibrowse, "4.4.0", optional: true},
       {:hackney, "~> 1.6", optional: true},
-      {:gun, "~> 1.3", optional: true},
+      {:gun, "~> 2.0.0-rc.2", optional: true},
       {:finch, "~> 0.3", optional: true},
       {:castore, "~> 0.1", optional: true},
       {:mint, "~> 1.0", optional: true},
