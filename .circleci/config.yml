@@ -41,6 +41,8 @@ jobs:
             - deps
             - ~/.mix
       - run:
+          environment:
+            MIX_ENV: dev
           name:       Semantic Release
           command:    npx semantic-release --extends @heathmont/semantic-release-elixir-hex
 
